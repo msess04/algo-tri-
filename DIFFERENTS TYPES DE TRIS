@@ -1,0 +1,129 @@
+
+
+
+######### TRI PAR SELECTION ########
+def tri_selection(L):
+  n=len(L)
+  
+  for i in range(0,n-1): #A chaque étape on recherche le minimum
+  m=L[i] #minimum temporaire : les termes d'indice <i sont déjà triés
+  k=i #indice du minimum temporaire
+  
+  for j in range(i+1): #On parcours la partie droite de la liste
+    if L[i]<m: #SI n trouve un élément plus petit
+      m=L[j] #Maj du minimu temporaire
+      k=j # Maj de son indice
+      
+   L[i],L[k]=L[k],L[i] #Permutation
+ return L
+ 
+ ###################################
+ 
+ 
+ ######### TRI PAR INSERTION #########
+ 
+ 
+import random as rd
+L=[]
+for k in range(11):#créer une liste aléatoire avec des entiers entre 1 et 10
+    L.append(rd.randint(1,10))
+
+def tri_insertion(L):
+    n=len(L)
+
+    for i in range(1,n):
+        x = L[i] # On stocke l'élément d'indice i
+        j = i-1 # Indice considéré pour insérer e
+
+        while j >= 0 and x<L[j]: #tant qu'on n'a pas trouvé la place de x
+            L[j+1]=L[j]#On translate les éméments supérieurs à x
+            j-=1 #On étudie la place précedente
+
+        L[j+1]=x# Quand la boucle while est terminée, on insère x à la bonne place
+        return L
+
+########################################
+
+
+########### TRI RAPIDE ###############
+
+
+def tri(L):
+  n=len(L)
+  if n==0 or n==1: # Dans ce cas la liste est déjà triée
+    return L
+  x=L[0] #on fixe un élément x (pivot)
+  L1=[]
+  L2=[]
+  for k in range (1,n): # On parcourt L
+    if L[K] < x:
+      L1.append(L[K]) #Les éléments inférieurs à x vont dans L1
+    else:
+      L2.append(L[K]) #les autres dans L2
+  return tri(L1)+[x]+tri(L2) #Tri récursif et concaténation
+        
+########################################
+
+
+
+########### TRI FUSION ################
+
+
+def tri_fusion(L):
+  n=len(L)
+  
+  if == 0 or n==1 # La liste est déjà triée
+    return L
+  
+  m=n//2 # Indice du milieu (ou presque)
+  
+  L1=tri_fusion(L[:m]) # On tri récursivement la premi
+  L2=tri_fusion(L[m:]) # Et la seconde =) 
+  
+  return fusion(L1,L2) #On renvoie la fusion des deux sous listes triées
+  
+def fusion(L1,L2):
+  n1=len(L1)
+  n2=len(L2)
+  L=[]
+  i=0 # Indice de parcours de L1
+  j=0 # Indice de parcours de L2
+  
+  while i<n1 and j<n2: # Tant du'on n'a pas épuisé une des deux listes
+    if L1[i] <= L2[j]: # On compare les deux prochains éléments
+      L.append(L1[i]) #s'il s'agit de celui de L1, on le stocke dans L
+      i+=1 # On décale l'indice de parcours de L1 de 1
+      
+    else:
+      L.append(L2[j]) #Sinon L2
+      j+=1  # On décale l'indice de parcours de L2 de 1
+      
+   # A la sortie de cette boucle while, l'une des listes est épuisée mais pas l'autre. Comme celle qui reste est déjà triée, il suffit de la recopier en fin de L
+   
+   while i<n1: # Cette boucle ne démarre que si L1 n'est pas épuisée
+    L.append(L1[i])
+    i+=1
+    
+   while j<n2: # cette boucle ne démarre qui si L2 n'est pas épuisée
+    L.append(L2[j])
+    j+=1
+    
+   # Une seule des deux boucles est parcourue (ou aucune)
+   
+   return L
+   
+   
+   #######################################################
+      
+    
+
+
+
+
+
+
+
+
+
+
+
